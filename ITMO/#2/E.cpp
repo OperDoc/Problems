@@ -1,4 +1,4 @@
-// 0 / 100
+// 7 / 100
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -22,8 +22,9 @@ struct L{
     long double A, B, C;
     L(long double a, long double b, long double c):A(a),B(b),C(c){}
     long double PLlen(P a)/*O(1)*/{
-      return (A * a.X + B * a.Y + C)/abs(P({A, B}));
+      return (A * a.X + B * a.Y - C)/abs(P({A, B}));
     }
+
 };
 
 vector<P> Ps;
@@ -51,7 +52,7 @@ int main(){
          long long a, b, c;
          cin >> a >> b >> c;
          L l = L(a, b, c);
-         bool les = false, mor = false;
+         bool les = false, mor = false, is = true;
          for(int j = 0; j < Ps.size(); j++){
             if(l.PLlen(Ps[j]) < 0){
                les = true;
@@ -61,13 +62,17 @@ int main(){
             }
             if(eq(l.PLlen(Ps[j]), 0)){
                cout << "NO" << '\n';
+               is = false;
                break;
             }
+            //cout << l.PLlen(Ps[j]) << '\n';
          }
-         if(les & mor){
-            cout << "NO" << '\n';
-         }else{
-            cout << "YES" << '\n';
+         if(is){
+            if(les & mor){
+               cout << "NO" << '\n';
+            }else{
+               cout << "YES" << '\n';
+            }
          }
       }
    }
