@@ -18,7 +18,7 @@ void dfs(i, j, k){
    auto s = make_pair(i, j);
    d[i][j] = 0;
    int dist = 0;
-   while(dist <= k){
+   while(dist <= k ){
 
    }
 }
