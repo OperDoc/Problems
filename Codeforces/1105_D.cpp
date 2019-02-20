@@ -1,39 +1,75 @@
 //https://codeforces.com/problemset/problem/1105/D
 #include <iostream>
 #include <queue>
+#include <vector>
+#include <string>
 
 using namespace std;
 
-bool in(int a, int b, int c){
-   return a <= b && b < c;
-}
+int n, m, p;
+int s[12], ans[12];
+string S;
+int f[1200][1200];
+int O[20];
+vector<int> X[10], Y[10];
 
-char g[1010][1010];
-int n, m, d[1010][1010], s[1010];
-int di = [1, 0, -1, 0];
-int dj = [0, 1, 0, -1];
-
-void dfs(i, j, k){
-   queue<pair<int, int>> q;
-   auto s = make_pair(i, j);
-   d[i][j] = 0;
-   int dist = 0;
-   while(dist <= k ){
-
-   }
+int bfs (int V, int &head, int N){
+   for (int i = 0; i < N; i++) {
+	   int tail = X[V].size() - 1;
+		while (head < tail) {
+		   head++;
+			int x = X[V][head];
+			int y = Y[V][head];
+			if (x + 1 < n && f[x + 1][y] == -1) {
+            X[V].push_back(x + 1);
+            Y[V].push_back(y);
+            f[x + 1][y]=V;
+         }
+			if (x - 1 >= 0 && f[x - 1][y] == -1) {
+            X[V].push_back(x - 1);
+            Y[V].push_back(y);
+            f[x-1][y]=V;
+         }
+			if (y + 1 < m && f[x][y + 1] == -1) {
+            X[V].push_back(x);
+            Y[V].push_back(y + 1);
+            f[x][y + 1]=V;
+         }
+			if (y - 1 >= 0 && f[x][y - 1] == -1) {
+            X[V].push_back(x);
+            Y[V].push_back(y - 1);
+            f[x][y - 1] = V;
+         }
+		}
+		if(head + 1 == X[V].size()) return 1;
+	}
+	return 0;
 }
 
 int main(){
-   int p;
-   cin >> n >> m >> p;
-   for(int i = 0; i < p; i++){
+	cin >> n >> m >> p;
+	for(int i = 0; i < p; i++){
       cin >> s[i];
    }
-   for(int i = 0; i < n; i++){
-      for(int j = 0; j < m; j++){
-         cin >> g[i][j];
-      }
-   }
-
+	for(int i = 0; i < n; i++){
+		cin >> S;
+		for (int j = 0; j < m; j++) {
+         f[i][j] = -1;
+			if(S[j] == '#') f[i][j] = -2;
+			if('1' <= S[j] && S[j] <= '9'){
+				f[i][j] = -2;
+				X[S[j] - '1'].push_back(i);
+				Y[S[j] - '1'].push_back(j);
+			}
+		}
+	}
+	for(int i = 0; i < p; i++) O[i] = -1;
+	for(int i = 0; i < 100000000; i++){
+		int o = 0;
+		for (int i = 0; i < p; i++) o += bfs(i, O[i], s[i]);
+		if( o == p ) break;
+	}
+	for(int i = 0; i < p; i++)
+      cout << X[i].size() << ' ';
    return 0;
 }
