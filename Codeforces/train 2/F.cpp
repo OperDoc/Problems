@@ -5,51 +5,52 @@
 
 using namespace std;
 
-bool isP[10000010];
+bool isP[10000010], ans[10000010];
+int sum[10000010];
 
-void euro(vector<int>& ans) {
-    isP[0] = true;
-    isP[1] = true;
-    for(int i = 2; i < 10000010; i++){
-        if(!isP[i]){
-            ans.push_back(i);
-            for(long long j = (long long)i * i; j < 10000010; j += i) {
-                isP[j] = true;
-            }
-        }
-    }
+int gcd(int a, int b) {
+    if(b == 0) return a;
+    return gcd(b, a % b);
 }
 
 int main() {
     //ios_base::sync_with_stdio(false);
     //cin.tie(0);
     //cout.tie(0);
-    vector<int> Ps;
-    euro(Ps);
+    isP[0] = false;
+    isP[1] = false;
+    for(int i = 2; i < 10000010; i++){
+        if(!isP[i]){
+            for(long long j = (long long)i * i; j < 10000010; j += i) {
+                isP[j] = true;
+            }
+        }
+    }
+    ans[0] = false;
+    ans[1] = true;
+    for(int i = 2; i < 10000010; i++){
+        if(!isP[i]){
+            ans[i] = 1;
+            for(long long j = i; j * i < 10000010; j += 1) {
+                ans[i * j] = !isP[j];
+            }
+        }
+    }
+    sum[0] = ans[0];
+    for(int i = 1; i < 10000010; i++) {
+        sum[i] = sum[i - 1] + ans[i];
+    }
     int T;
     cin >> T;
-    cout << fixed;
-    cout.precision(4);
     for(int t = 0; t < T; t++) {
-        int d, i;
-        long long x, cnt = 0;
-        cin >> d >> x;
-        for(i = 0; i <= d; i++) {
-            if(x == cnt) {
-                break;
-            }
-            if(cnt < x) {
-                 cnt += ((long long)1<<(d - i));
-            } else {
-                cnt -= ((long long)1<<(d - i));
-            }
-        }
+        int n, res, GCD;
+        cin >> n;
+        res = sum[n];
+        GCD = gcd(res, n);
+        res = res / GCD;
+        n = n / GCD;
         cout << "Case " << t+1 << ": ";
-        if(cnt == x) {
-            cout << "YES " << i;
-        } else {
-            cout << "NO";
-        }
+        cout << res << '/' << n;
         cout << '\n';
     }
     return 0;
