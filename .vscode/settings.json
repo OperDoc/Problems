@@ -6,7 +6,13 @@
         "iostream": "cpp",
         "xiosbase": "cpp",
         "ios": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "utility": "cpp",
+        "initializer_list": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
