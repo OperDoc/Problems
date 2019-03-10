@@ -19,5 +19,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    
+    z a, b;
+    in >> a >> b;
+    if(a < b) out << 0 << nl;
+    else out << a + b <<  a - b << nl;
 }
+
