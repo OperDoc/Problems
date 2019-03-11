@@ -23,17 +23,12 @@ int main() {
     in >> m >> d;
     k = d;
     ve<pr<z, z>> ds;
-    if(k == 2) {
-        ds.pb(mp(2, 1));
-    }
-    if(k == 3) {
-        ds.pb(mp(3, 1));
-    }
     for(z i = 2; i * i <= k; i++) {
         z cnt = 0;
         while(k % i == 0) {cnt++; k/=i;}
         ds.pb(mp(i, cnt));
     }
+    if(k != 1) ds.pb(mp(k, 1));
     fo(i, ds.size()) {
         ds[i].sc = (ds[i].sc + m - 1) / m;
     }
@@ -43,7 +38,6 @@ int main() {
             ans *= (long long)ds[i].fs;
         }
     }
-    if(ans < 0) while(true){ans = -1;}
     cout << ans << nl;
 }
 
