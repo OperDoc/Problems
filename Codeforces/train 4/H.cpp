@@ -21,6 +21,7 @@ z n, m;
 ve<z> g[10010], G[10010];
 bool u[10010], u2[10010];
 int dfs(int v) {
+    //cout << v << ' ';
     z res = 1;
     u[v] = true;
     fe(i, g[v]) {
@@ -29,10 +30,11 @@ int dfs(int v) {
     return res;
 }
 int dfs2(int v) {
+    //cout << v << ' ';
     z res = 1;
     u2[v] = true;
     fe(i, G[v]) {
-        if(!u2[i]) res += dfs(i);
+        if(!u2[i]) res += dfs2(i);
     }
     return res;
 }
@@ -49,28 +51,30 @@ int main() {
         }
     }
     in >> a >> b >> c >> d;
-    mtr[a - 1][b - 1]--;
+    mtr[a + 1][b + 1]--;
     fo(i, n) {
         fo(j, m) {
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 3])g[i * n + j].pb(i * n + j + 1);
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 1])g[i * n + j].pb(i * n + j - 1);
-            if(mtr[i + 2][j + 2] == mtr[i + 3][j + 2])g[i * n + j].pb(i * n + j + n);
-            if(mtr[i + 2][j + 2] == mtr[i + 1][j + 2])g[i * n + j].pb(i * n + j - n);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 3])g[i * m + j].pb(i * m + j + 1);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 1])g[i * m + j].pb(i * m + j - 1);
+            if(mtr[i + 2][j + 2] == mtr[i + 3][j + 2])g[i * m + j].pb(i * m + j + m);
+            if(mtr[i + 2][j + 2] == mtr[i + 1][j + 2])g[i * m + j].pb(i * m + j - m);
 
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 3])G[i * n + j].pb(i * n + j + 1);
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 1])G[i * n + j].pb(i * n + j - 1);
-            if(mtr[i + 2][j + 2] == mtr[i + 3][j + 2])G[i * n + j].pb(i * n + j + n);
-            if(mtr[i + 2][j + 2] == mtr[i + 1][j + 2])G[i * n + j].pb(i * n + j - n);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 3])G[i * m + j].pb(i * m + j + 1);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 1])G[i * m + j].pb(i * m + j - 1);
+            if(mtr[i + 2][j + 2] == mtr[i + 3][j + 2])G[i * m + j].pb(i * m + j + m);
+            if(mtr[i + 2][j + 2] == mtr[i + 1][j + 2])G[i * m + j].pb(i * m + j - m);
 
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 4])G[i * n + j].pb(i * n + j + 2);
-            if(mtr[i + 2][j + 2] == mtr[i + 2][j])G[i * n + j].pb(i * n + j - 2);
-            if(mtr[i + 2][j + 2] == mtr[i + 4][j + 2])G[i * n + j].pb(i * n + j + 2 * n);
-            if(mtr[i + 2][j + 2] == mtr[i][j + 2])G[i * n + j].pb(i * n + j - 2 * n);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j + 4])G[i * m + j].pb(i * m + j + 2);
+            if(mtr[i + 2][j + 2] == mtr[i + 2][j])G[i * m + j].pb(i * m + j - 2);
+            if(mtr[i + 2][j + 2] == mtr[i + 4][j + 2])G[i * m + j].pb(i * m + j + 2 * m);
+            if(mtr[i + 2][j + 2] == mtr[i][j + 2])G[i * m + j].pb(i * m + j - 2 * m);
         }
     }
-    z res = dfs((a - 1) * n + b - 1);
-    if(u[(c - 1) * n + d - 1]) {
-        res = dfs2((a - 1) * n + b - 1);
+    z res = dfs((a - 1) * m + b - 1);
+    //cout << nl;
+    if(u[(c - 1) * m + d - 1]) {
+        res = dfs2((a - 1) * m + b - 1);
+        //out << nl;
     }
     out << res;
 }
