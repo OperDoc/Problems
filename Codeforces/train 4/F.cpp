@@ -23,7 +23,23 @@ ve<ve<char>> nm;
 char go(int i, int j){
     if(i < 0 || i >= n || j < 0 || j >= m) return 'x';
     if(nm[i][j] != '0') return nm[i][j];
-    return nm[i][j] = ((go(i + 1, j) == '2') || (go(i, j + 1) == '2') || (go(i + 1, j + 1) == '2')) ? '1' : '2';
+    bool is = false;
+    z k = 1;
+    while(go(i + k, j) != 'x') {
+        if(go(i + k, j) == '2')  is = true;
+        k++;
+    }
+    k = 1;
+    while(go(i, j + k) != 'x') {
+        if(go(i, j + k) == '2')  is = true;
+        k++;
+    }
+    k = 1;
+    while(go(i + k, j + k) != 'x') {
+        if(go(i + k, j + k) == '2')  is = true;
+        k++;
+    }
+    return nm[i][j] = is ? '1' : '2';
 }
 
 int main() {
@@ -37,11 +53,6 @@ int main() {
             in >> nm[i][j];
         }
     }
-    cout << go(0, 0) << nl;
-    fo(i, n) {
-        fo(j, m) {
-            out << nm[i][j];
-        }
-        out << nl;
-    }
+    cout << (go(0, 0) == '1' ? "Andrew" : "Anuar") << nl;
+    
 }
