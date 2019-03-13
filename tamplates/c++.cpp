@@ -4,6 +4,8 @@ using namespace std;
 
 typedef int z;
 #define fo(i, n) for(int i = 0; i < n; i++)
+#define fe(i, a) for(auto &i : a)
+#define ff(i, a) for(int i = 0; i < a.size(); i++)
 #define mp make_pair
 #define pb push_back
 #define al(a) a.begin(),a.end() 
