@@ -17,7 +17,9 @@
         "deque": "cpp",
         "queue": "cpp",
         "stack": "cpp",
-        "xtr1common": "cpp"
+        "xtr1common": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
