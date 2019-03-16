@@ -2,7 +2,7 @@
 
 using namespace std;
 
-typedef long long z;
+typedef long double z;
 #define fo(i, n) for(int i = 0; i < n; i++)
 #define fe(i, a) for(auto &i : a)
 #define ff(i, a) for(int i = 0; i < a.size(); i++)
@@ -18,8 +18,20 @@ typedef long long z;
 #define nl '\n'
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(0);
+    //cout.tie(0);
+    int n, m, k;
+    in >> n >> m;
+    k = max(n, m);
+    ve<z> a(k, 1), b(k, 1);
+    fo(i, n) in >> a[i];
+    fo(i, m) in >> b[i];
+    z ans = 1;
+    fo(i, k) {
+        ans *= a[i];
+        ans /= b[i];
+    }
+    long long res = ans;
+    cout << res;
 }
