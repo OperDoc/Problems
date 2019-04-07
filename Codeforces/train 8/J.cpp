@@ -19,6 +19,10 @@ typedef int z;
 
 #define N 100000
 
+
+
+
+
 z arr[N];
 
 z input(){ z a; in >> a;return a;}
