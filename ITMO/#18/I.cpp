@@ -3,9 +3,9 @@
 using namespace std;
 
 typedef int z;
-#define fo(i, n) for(int i = 0; i < n; i++)
+#define fo(i, n) for(int i = 0; i != n; ++i)
 #define fe(i, a) for(auto &i : a)
-#define ff(i, a) for(int i = 0; i < a.size(); i++)
+#define ff(i, a) for(int i = 0; i != a.size(); ++i)
 #define al(a) a.begin(),a.end()
 #define ve vector
 #define pb push_back
@@ -17,14 +17,12 @@ typedef int z;
 #define out cout 
 #define nl '\n'
 
-long long ans(long long n) {
-	
-}
-
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    long long L, R;
-    in >> L >> R;
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(0);
+    //cout.tie(0);
+    long long a, b, c;
+    in >> a >> b;
+    c = a + (a + b - 1) / b;
+    out << c << nl;
 }
